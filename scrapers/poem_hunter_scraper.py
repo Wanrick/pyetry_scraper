@@ -70,7 +70,7 @@ def get_poem_page_count(poet, poet_url):
         if poetry_list.status_code != requests.codes.ok:
             raise Exception('The poet {} has no poems on poemhunter.com'.format(poet))
         page_content = BeautifulSoup(poetry_list.text, 'lxml')
-        if len(page_content.findAll('td', class_='title')) > 40:
+        if len(page_content.findAll('td', class_='title')) >= 40:
             pagination_container = page_content.find('div', class_='pagination')
             pages_list = pagination_container.findAll('li')
             return int(pages_list[len(pages_list) - 1].find('a').text)
